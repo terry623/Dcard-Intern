@@ -4,17 +4,21 @@ import { Button, Upload, Icon, Input } from 'antd';
 
 import { getImageFromRemoteUrl } from '../utils';
 
+import './UploadAction.scss';
+
 const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
-  const [urlInput, setUrlInputl] = useState('');
+  const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+  const [urlInput, setUrlInput] = useState(defaultImageUrl);
 
   const reader = new FileReader();
   reader.addEventListener('load', () => setImageUrl(reader.result));
 
   const suffix = urlInput ? (
     <Icon
-      type="close-circle"
-      onClick={() => {
-        const imageUrl = getImageFromRemoteUrl('');
+      type="upload"
+      onClick={async () => {
+        setIsOpenModal(false);
+        const imageUrl = await getImageFromRemoteUrl(urlInput);
         setImageUrl(imageUrl);
       }}
     />
@@ -39,10 +43,11 @@ const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
       </Upload>
       <Input
         placeholder="Enter URL"
+        className="uploadAction-urlInput"
         prefix={<Icon type="cloud" style={{ color: 'rgba(0,0,0,.25)' }} />}
         suffix={suffix}
         value={urlInput}
-        onChange={e => setUrlInputl(e.target.value)}
+        onChange={e => setUrlInput(e.target.value)}
       />
     </Fragment>
   );

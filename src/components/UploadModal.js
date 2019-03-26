@@ -9,7 +9,7 @@ const UploadModal = ({ setImageUrl }) => {
 
   return (
     <Modal
-      title="Upload Image"
+      title="Upload Your Favourite Pictures"
       bodyStyle={{ display: 'flex', justifyContent: 'center' }}
       visible={isOpenModal}
       footer={null}
