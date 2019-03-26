@@ -10,9 +10,7 @@ export const getImageFromRemoteUrl = async url => {
       response.headers['content-type']
     };base64,${Buffer.from(response.data, 'binary').toString('base64')}`;
 
-    const img = new Image();
-    img.src = imageUrl;
-    document.body.appendChild(img);
+    return imageUrl;
   } catch (error) {
     console.error(error);
   }

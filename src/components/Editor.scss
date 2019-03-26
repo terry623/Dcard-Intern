@@ -1,5 +1,12 @@
 .editor {
-  &-userImage {
-    width: 200px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+
+  &-imageWrapper {
+    width: 20vw;
+    &-userImage {
+      max-width: 100%;
+    }
   }
 }
