@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
@@ -21,6 +21,7 @@ const Editor = () => {
   // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
 
   const [imageUrl, setImageUrl] = useState(defaultImageUrl);
+  const [haveCanvas, sethaveCanvas] = useState(false);
   const [cropper, setCropper] = useState(null);
 
   useEffect(() => {
@@ -35,27 +36,33 @@ const Editor = () => {
       {imageUrl && (
         <Fragment>
           <div className="editor-toolBox">
-            <Button
-              type="primary"
-              className="editor-toolBox-finishCrop"
-              onClick={() => {
-                const canvasImage = cropper.getCroppedCanvas({
-                  maxWidth: window.innerWidth * 0.3,
-                });
+            {!haveCanvas ? (
+              <Button
+                type="primary"
+                className="editor-toolBox-finishCrop"
+                onClick={() => {
+                  const canvasImage = cropper.getCroppedCanvas({
+                    maxWidth: window.innerWidth * 0.3,
+                  });
 
-                canvasImage.id = imageCanvasId;
-                const imageWrapper = document.getElementById(imageWrapperId);
-                imageWrapper.replaceChild(
-                  canvasImage,
-                  imageWrapper.childNodes[0]
-                );
-                cropper.destroy();
-                drawImage(imageCanvasId);
-              }}
-            >
-              FINISH
-              <Icon type="caret-right" />
-            </Button>
+                  canvasImage.id = imageCanvasId;
+                  const imageWrapper = document.getElementById(imageWrapperId);
+                  imageWrapper.replaceChild(
+                    canvasImage,
+                    imageWrapper.childNodes[0]
+                  );
+                  cropper.destroy();
+                  drawImage(imageCanvasId);
+                  sethaveCanvas(true);
+                }}
+              >
+                完成裁切
+              </Button>
+            ) : (
+              <div className="editor-toolBox-save">
+                <h2>用滑鼠隨便塗鴉 ! 並將圖片存起來吧 😍</h2>
+              </div>
+            )}
           </div>
           <div className="editor-imageArea">
             <div className="editor-imageArea-imageWrapper" id={imageWrapperId}>

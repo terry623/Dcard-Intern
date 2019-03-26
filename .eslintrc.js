@@ -24,6 +24,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'jsx-a11y/accessible-emoji': 'off',
+    'react/no-unescaped-entities': 'off',
     'react/no-array-index-key': 'off',
     'react/destructuring-assignment': 'off',
     'react/no-access-state-in-setstate': 'off',

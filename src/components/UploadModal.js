@@ -9,7 +9,7 @@ const UploadModal = ({ setImageUrl }) => {
 
   return (
     <Modal
-      title="Upload Your Favourite Pictures"
+      title="上傳你喜愛的照片 / 貼上網址"
       bodyStyle={{ display: 'flex', justifyContent: 'center' }}
       visible={isOpenModal}
       closable={false}
