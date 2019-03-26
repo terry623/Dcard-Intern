@@ -4,11 +4,14 @@ import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
 import UploadModal from './UploadModal';
+import { drawImage } from '../utils';
 
 import './Editor.scss';
 
 const Editor = () => {
   const targetImageId = 'targetImageId';
+  const imageWrapperId = 'imageWrapperId';
+  const imageCanvasId = 'imageCanvasId';
 
   // 不放預設圖片
   const defaultImageUrl = '';
@@ -18,26 +21,14 @@ const Editor = () => {
   // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
 
   const [imageUrl, setImageUrl] = useState(defaultImageUrl);
-  const [haveCrop, setHaveCrop] = useState(false);
   const [cropper, setCropper] = useState(null);
 
   useEffect(() => {
     const image = document.getElementById(targetImageId);
-    if (!haveCrop) {
-      if (image) {
-        setCropper(new Cropper(image));
-        setHaveCrop(true);
-      }
-    } else {
-      cropper.destroy();
+    if (image) {
+      setCropper(new Cropper(image));
     }
   }, [imageUrl]);
-
-  const toDataURL = () => {
-    const canvasImage = cropper.getCroppedCanvas();
-    const dataURL = canvasImage.toDataURL();
-    setImageUrl(dataURL);
-  };
 
   return (
     <div className="editor">
@@ -47,14 +38,27 @@ const Editor = () => {
             <Button
               type="primary"
               className="editor-toolBox-finishCrop"
-              onClick={toDataURL}
+              onClick={() => {
+                const canvasImage = cropper.getCroppedCanvas({
+                  maxWidth: window.innerWidth * 0.3,
+                });
+
+                canvasImage.id = imageCanvasId;
+                const imageWrapper = document.getElementById(imageWrapperId);
+                imageWrapper.replaceChild(
+                  canvasImage,
+                  imageWrapper.childNodes[0]
+                );
+                cropper.destroy();
+                drawImage(imageCanvasId);
+              }}
             >
               FINISH
               <Icon type="caret-right" />
             </Button>
           </div>
           <div className="editor-imageArea">
-            <div className="editor-imageArea-imageWrapper">
+            <div className="editor-imageArea-imageWrapper" id={imageWrapperId}>
               <img
                 id={targetImageId}
                 src={imageUrl}
