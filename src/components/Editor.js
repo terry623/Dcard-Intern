@@ -60,7 +60,7 @@ const Editor = () => {
               </Button>
             ) : (
               <div className="editor-toolBox-save">
-                <h2>用滑鼠隨便塗鴉 ! 並將圖片存起來吧 😍</h2>
+                用滑鼠隨便塗鴉 ! 並將圖片存起來吧 😍
               </div>
             )}
           </div>

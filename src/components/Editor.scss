@@ -1,6 +1,5 @@
 $area-width: 30%;
 $area-height: 10vh;
-$button-width: 20%;
 
 @mixin basicFlex {
   display: flex;
@@ -20,8 +19,8 @@ $button-width: 20%;
     margin-left: auto;
     margin-right: auto;
 
-    &-finishCrop {
-      width: $button-width;
+    &-save {
+      font-size: 2.5vh;
     }
   }
 
