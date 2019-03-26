@@ -1,10 +1,24 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import { Button, Upload, Icon } from 'antd';
+import React, { Fragment, useState } from 'react';
+import { Button, Upload, Icon, Input } from 'antd';
+
+import { getImageFromRemoteUrl } from '../utils';
 
 const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
+  const [urlInput, setUrlInputl] = useState('');
+
   const reader = new FileReader();
   reader.addEventListener('load', () => setImageUrl(reader.result));
+
+  const suffix = urlInput ? (
+    <Icon
+      type="close-circle"
+      onClick={() => {
+        const imageUrl = getImageFromRemoteUrl('');
+        setImageUrl(imageUrl);
+      }}
+    />
+  ) : null;
 
   return (
     <Fragment>
@@ -18,11 +32,18 @@ const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
           return false;
         }}
       >
-        <Button >
-          <Icon type="upload" />
-          Click to Upload
+        <Button>
+          <Icon type="file" />
+          Local File
         </Button>
       </Upload>
+      <Input
+        placeholder="Enter URL"
+        prefix={<Icon type="cloud" style={{ color: 'rgba(0,0,0,.25)' }} />}
+        suffix={suffix}
+        value={urlInput}
+        onChange={e => setUrlInputl(e.target.value)}
+      />
     </Fragment>
   );
 };
