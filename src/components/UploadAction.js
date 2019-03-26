@@ -1,42 +1,35 @@
-import React, { Fragment, useState } from 'react';
-import { Upload, Icon, Modal } from 'antd';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { Button, Upload, Icon } from 'antd';
 
-const UploadAction = () => {
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'xxx.png',
-      status: 'done',
-      url:
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
+const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => setImageUrl(reader.result));
 
   return (
     <Fragment>
       <Upload
-        action=""
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={file => {
-          setPreviewImage(file.url || file.thumbUrl);
-          setPreviewVisible(true);
+        name="userImage"
+        showUploadList={false}
+        beforeUpload={file => {
+          console.log(file);
+          reader.readAsDataURL(file);
+          setIsOpenModal(false);
+          return false;
         }}
-        onChange={info => setFileList(info.fileList)}
       >
-        {fileList.length >= 3 ? null : <Icon type="plus" />}
+        <Button >
+          <Icon type="upload" />
+          Click to Upload
+        </Button>
       </Upload>
-      <Modal
-        visible={previewVisible}
-        footer={null}
-        onCancel={() => setPreviewVisible(false)}
-      >
-        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-      </Modal>
     </Fragment>
   );
+};
+
+UploadAction.propTypes = {
+  setImageUrl: PropTypes.func.isRequired,
+  setIsOpenModal: PropTypes.func.isRequired,
 };
 
 export default UploadAction;

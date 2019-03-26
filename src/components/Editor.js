@@ -1,10 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import UploadModal from './UploadModal';
 
-const Editor = () => (
-  <Fragment>
-    <UploadModal />
-  </Fragment>
-);
+import './Editor.scss';
+
+const Editor = () => {
+  const [imageUrl, setImageUrl] = useState('');
+
+  return (
+    <Fragment>
+      {imageUrl && (
+        <img src={imageUrl} className="editor-userImage" alt="imageUrl" />
+      )}
+      <UploadModal setImageUrl={setImageUrl} />
+    </Fragment>
+  );
+};
 
 export default Editor;

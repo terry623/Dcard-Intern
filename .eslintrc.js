@@ -27,6 +27,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/destructuring-assignment': 'off',
     'react/no-access-state-in-setstate': 'off',
+    'react/jsx-wrap-multilines': 'off',
     'react/sort-prop-types': [
       'error',
       {

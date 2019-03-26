@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Modal } from 'antd';
 
 import UploadAction from './UploadAction';
 
-const UploadModal = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
-  useEffect(() => {
-    setIsOpenModal(true);
-  }, []);
+const UploadModal = ({ setImageUrl }) => {
+  const [isOpenModal, setIsOpenModal] = useState(true);
 
   return (
     <Modal
       title="Upload"
+      bodyStyle={{ display: 'flex', justifyContent: 'center' }}
       visible={isOpenModal}
-      onOk={() => setIsOpenModal(false)}
-      onCancel={() => setIsOpenModal(false)}
+      footer={null}
+      centered
     >
-      <UploadAction />
+      <UploadAction setImageUrl={setImageUrl} setIsOpenModal={setIsOpenModal} />
     </Modal>
   );
+};
+
+UploadModal.propTypes = {
+  setImageUrl: PropTypes.func.isRequired,
 };
 
 export default UploadModal;
