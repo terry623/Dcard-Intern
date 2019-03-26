@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import UploadModal from './UploadModal';
 
 const Editor = () => (
-  <div>
+  <Fragment>
     <UploadModal />
-  </div>
+  </Fragment>
 );
 
 export default Editor;
