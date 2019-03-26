@@ -7,10 +7,10 @@ import { getImageFromRemoteUrl } from '../api';
 import './UploadAction.scss';
 
 const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
-    // 預設直版圖片
-  // const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+  // 預設直版圖片
+  const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
   // 預設橫版圖片
-  const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
+  // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
   const [urlInput, setUrlInput] = useState(defaultImageUrl);
 
   const reader = new FileReader();

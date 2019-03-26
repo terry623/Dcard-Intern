@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-import UploadModal from './UploadModal';
+// import UploadModal from './UploadModal';
 
 import './Editor.scss';
 
@@ -12,9 +12,9 @@ const Editor = () => {
   const targetImageId = 'targetImageId';
 
   // 不放預設圖片
-  const defaultImageUrl = '';
+  // const defaultImageUrl = '';
   // 預設直版圖片
-  // const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+  const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
   // 預設橫版圖片
   // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
 
@@ -34,22 +34,15 @@ const Editor = () => {
           <div className="editor-toolBox">
             <Button
               type="primary"
-              className="editor-toolBox-sticker"
-              onClick={() => console.log('DO SOMETHING')}
-            >
-              DO SOMETHING
-            </Button>
-            <Button
-              className="editor-toolBox-export"
+              className="editor-toolBox-finishCrop"
               onClick={() => {
                 const canvasImage = cropper.getCroppedCanvas();
                 const dataURL = canvasImage.toDataURL();
-                const img = new Image();
-                img.src = dataURL;
-                document.body.appendChild(img);
+                console.log(dataURL);
               }}
             >
-              Export
+              FINISH
+              <Icon type="caret-right" />
             </Button>
           </div>
           <div className="editor-imageArea">
@@ -64,8 +57,7 @@ const Editor = () => {
           </div>
         </Fragment>
       )}
-
-      <UploadModal setImageUrl={setImageUrl} />
+      {/* <UploadModal setImageUrl={setImageUrl} /> */}
     </div>
   );
 };
