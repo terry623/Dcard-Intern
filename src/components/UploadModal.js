@@ -12,6 +12,7 @@ const UploadModal = ({ setImageUrl }) => {
       title="Upload Your Favourite Pictures"
       bodyStyle={{ display: 'flex', justifyContent: 'center' }}
       visible={isOpenModal}
+      closable={false}
       footer={null}
       centered
     >

@@ -1,12 +1,43 @@
-.editor {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+$area-width: 30%;
+$button-width: 40%;
 
-  &-imageWrapper {
-    width: 20vw;
-    &-userImage {
-      max-width: 100%;
+@mixin basicFlex {
+  display: flex;
+  align-items: center;
+  @content;
+}
+
+.editor {
+  &-toolBox {
+    @include basicFlex {
+      justify-content: space-between;
+    }
+
+    width: $area-width;
+    height: 10vh;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    &-sticker {
+      width: $button-width;
+    }
+    &-export {
+      width: $button-width;
+    }
+  }
+
+  &-imageArea {
+    @include basicFlex {
+      justify-content: center;
+    }
+
+    &-imageWrapper {
+      width: $area-width;
+
+      &-userImage {
+        max-width: 100%;
+      }
     }
   }
 }

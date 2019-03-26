@@ -2,12 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 import { Button, Upload, Icon, Input } from 'antd';
 
-import { getImageFromRemoteUrl } from '../utils';
+import { getImageFromRemoteUrl } from '../api';
 
 import './UploadAction.scss';
 
 const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
-  const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+    // 預設直版圖片
+  // const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+  // 預設橫版圖片
+  const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
   const [urlInput, setUrlInput] = useState(defaultImageUrl);
 
   const reader = new FileReader();
@@ -30,7 +33,6 @@ const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
         name="userImage"
         showUploadList={false}
         beforeUpload={file => {
-          console.log(file);
           reader.readAsDataURL(file);
           setIsOpenModal(false);
           return false;
