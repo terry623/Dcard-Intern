@@ -19,7 +19,6 @@ module.exports = {
     'consistent-return': 'off',
     'implicit-arrow-linebreak': 'off',
     'import/prefer-default-export': 'off',
-    'no-return-assign': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/mouse-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
