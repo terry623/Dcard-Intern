@@ -3,29 +3,41 @@ import { Button, Icon } from 'antd';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-// import UploadModal from './UploadModal';
+import UploadModal from './UploadModal';
 
 import './Editor.scss';
 
 const Editor = () => {
-  let cropper;
   const targetImageId = 'targetImageId';
 
   // 不放預設圖片
-  // const defaultImageUrl = '';
+  const defaultImageUrl = '';
   // 預設直版圖片
-  const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
+  // const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
   // 預設橫版圖片
   // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
 
   const [imageUrl, setImageUrl] = useState(defaultImageUrl);
+  const [haveCrop, setHaveCrop] = useState(false);
+  const [cropper, setCropper] = useState(null);
 
   useEffect(() => {
     const image = document.getElementById(targetImageId);
-    if (image) {
-      cropper = new Cropper(image);
+    if (!haveCrop) {
+      if (image) {
+        setCropper(new Cropper(image));
+        setHaveCrop(true);
+      }
+    } else {
+      cropper.destroy();
     }
   }, [imageUrl]);
+
+  const toDataURL = () => {
+    const canvasImage = cropper.getCroppedCanvas();
+    const dataURL = canvasImage.toDataURL();
+    setImageUrl(dataURL);
+  };
 
   return (
     <div className="editor">
@@ -35,11 +47,7 @@ const Editor = () => {
             <Button
               type="primary"
               className="editor-toolBox-finishCrop"
-              onClick={() => {
-                const canvasImage = cropper.getCroppedCanvas();
-                const dataURL = canvasImage.toDataURL();
-                console.log(dataURL);
-              }}
+              onClick={toDataURL}
             >
               FINISH
               <Icon type="caret-right" />
@@ -57,7 +65,7 @@ const Editor = () => {
           </div>
         </Fragment>
       )}
-      {/* <UploadModal setImageUrl={setImageUrl} /> */}
+      <UploadModal setImageUrl={setImageUrl} />
     </div>
   );
 };
