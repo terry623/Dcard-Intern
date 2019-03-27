@@ -13,14 +13,7 @@ const Editor = () => {
   const imageWrapperId = 'imageWrapperId';
   const imageCanvasId = 'imageCanvasId';
 
-  // 不放預設圖片
-  const defaultImageUrl = '';
-  // 預設直版圖片
-  // const defaultImageUrl = 'https://i.imgur.com/1fUp5uG.jpg';
-  // 預設橫版圖片
-  // const defaultImageUrl = 'https://i.imgur.com/hIVvFvo.png';
-
-  const [imageUrl, setImageUrl] = useState(defaultImageUrl);
+  const [imageUrl, setImageUrl] = useState('');
   const [haveCanvas, sethaveCanvas] = useState(false);
   const [cropper, setCropper] = useState(null);
 
