@@ -1,3 +1,5 @@
+const limitKB = 1000;
+
 export const drawImage = id => {
   const canvas = document.querySelector(`#${id}`);
   const ctx = canvas.getContext('2d');
@@ -35,4 +37,9 @@ export const drawImage = id => {
   canvas.addEventListener('mouseout', () => {
     isDrawing = false;
   });
+};
+
+export const checkFileSize = size => {
+  if (size / 1024 > limitKB) return false;
+  return true;
 };

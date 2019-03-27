@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
-import { Button, Upload, Icon, Input } from 'antd';
+import { Button, Upload, Icon, Input, message } from 'antd';
 
 import { getImageFromRemoteUrl } from '../api';
+import { checkFileSize } from '../utils';
 
 import './UploadAction.scss';
 
@@ -33,8 +34,13 @@ const UploadAction = ({ setImageUrl, setIsOpenModal }) => {
         name="userImage"
         showUploadList={false}
         beforeUpload={file => {
-          reader.readAsDataURL(file);
-          setIsOpenModal(false);
+          const underLimit = checkFileSize(file.size);
+          if (underLimit) {
+            reader.readAsDataURL(file);
+            setIsOpenModal(false);
+          } else {
+            message.warning('檔案大小超過上限囉 !');
+          }
           return false;
         }}
       >
